@@ -21,7 +21,7 @@
           label="Bolívares (Bs)"
           variant="outlined"
           type="text"
-          inputmode="decimal"
+          inputmode="text"
           pattern="[0-9+\-*/. ()]*"
           hide-details
           clearable
@@ -34,7 +34,7 @@
           label="Dólares (USD)"
           variant="outlined"
           type="text"
-          inputmode="decimal"
+          inputmode="text"
           pattern="[0-9+\-*/. ()]*"
           hide-details
           clearable
