@@ -7,4 +7,18 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
+  app: {
+      head: {
+        title: 'Calculadora BCV',
+        meta: [
+      { name: 'description', content: 'Calculadora con la taza oficial del Dolar BCV a Bolivares.' }
+      ],
+        htmlAttrs: {
+          lang: 'es',
+          },
+          link: [
+          { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        ]
+        }
+      }
 })
