@@ -66,29 +66,14 @@ const bolivares = ref("")
 const usd = ref("")
 const fuente = ref("")
 
-const CACHE_KEY = "bcv_tasa"
-const CACHE_TIME = 5 * 60 * 60 * 1000 // 5 horas
+
 
 async function obtenerTasas() {
-  const ahora = Date.now()
-  const cache = localStorage.getItem(CACHE_KEY)
-  if (cache) {
-    const { data, timestamp } = JSON.parse(cache)
-    if (ahora - timestamp < CACHE_TIME) {
-      console.log("Usando cache local 👌")
-      tasa.value = data.tasa
-      fechaActualizacion.value = data.fecha
-      fuente.value = data.fuente
-      return
-    }
-  }
-
   try {
     const { data } = await axios.get("https://bcvapi.tech/api/v1/dolar")
     tasa.value = data.tasa
     fechaActualizacion.value = data.fecha
     fuente.value = data.fuente
-    localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: ahora }))
   } catch (error) {
     console.error("Error al obtener tasas:", error)
   }
