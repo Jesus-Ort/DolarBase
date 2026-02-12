@@ -77,9 +77,9 @@ async function obtenerUsd() {
         return Number(cache.value)
       }
     }
-    const data = await axios.get('https://bcv.justcarlux.dev/api/v1/rates')
+    const data = await axios.get('https://ve.dolarapi.com/v1/dolares/oficial')
 
-    const valor = Number(data?.rates?.usd || 0)
+    const valor = Number(data?.promedio || 0)
 
     tasa.value = valor
 
