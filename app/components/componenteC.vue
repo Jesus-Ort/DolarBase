@@ -9,7 +9,7 @@
         <!-- Tasa oficial -->
         <div class="text-center mb-4">
           <p class="text-subtitle-2 text-grey-darken-1">Tasa oficial del BCV</p>
-          <p class="text-h6 font-weight-bold">USD: {{ tasa.toFixed(2) }} Bs</p>
+          <p class="text-h6 font-weight-bold">USD: {{ Number(tasa.value).toFixed(2) }} Bs</p>
           <p class="text-caption text-grey mt-1">
             Actualizado: {{ fechaActualizacion }}
           </p>
@@ -84,13 +84,13 @@ function evaluarExpresion(expresion) {
 
 function convertirDesdeBs() {
   const valor = evaluarExpresion(bolivares.value)
-  const resultado = valor / tasa.value
+  const resultado = Number(valor) / tasa.value
   usd.value = resultado ? resultado.toFixed(2) : ""
 }
 
 function convertirDesdeUsd() {
   const valor = evaluarExpresion(usd.value)
-  const resultado = valor * tasa.value
+  const resultado = Number(valor) * tasa.value
   bolivares.value = resultado ? resultado.toFixed(2) : ""
 }
 
