@@ -76,7 +76,6 @@ async function obtenerUsd() {
       if (ahora - cache.timestamp < CACHE_TIME) {
         tasa.value = Number(cache.value)
         fechaActualizacion.value = cache.fechaActualizacion || ""
-        return tasa.value
       }
     }
 
