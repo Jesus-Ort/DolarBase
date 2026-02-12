@@ -65,10 +65,9 @@ const fechaActualizacion = ref("")
 const bolivares = ref("")
 const usd = ref("")
 
-
-async function obtenerTasas() {
+function obtenerTasas() {
   try {
-    tasa.value = await obtenerUsd()
+    tasa.value = obtenerUsd()
   } catch (error) {
     console.error("Error al obtener tasas:", error)
   }
