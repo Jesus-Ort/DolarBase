@@ -58,12 +58,45 @@
 
 <script setup>
 import { ref, onMounted } from "vue"
-import { obtenerUsd } from '~/composables/useUsd'
+import axios from "axios"
 
 const tasa = ref(0)
 const fechaActualizacion = ref("")
 const bolivares = ref("")
 const usd = ref("")
+const CACHE_KEY = 'usd_cache'
+const CACHE_TIME = 1 * 60 * 60 * 1000 
+
+async function obtenerUsd() {
+  try {
+    const saved = localStorage.getItem(CACHE_KEY)
+    if (saved) {
+      const cache = JSON.parse(saved)
+      const ahora = Date.now()
+      if (ahora - cache.timestamp < CACHE_TIME) {
+        return Number(cache.value)
+      }
+    }
+    const data = await axios.get('https://bcv.justcarlux.dev/api/v1/rates')
+
+    const valor = Number(data?.data?.rates?.usd || 0)
+
+    tasa.value = valor
+
+    localStorage.setItem(
+      CACHE_KEY,
+      JSON.stringify({
+        value: valor,
+        timestamp: Date.now()
+      })
+    )
+
+    return valor
+  } catch (error) {
+    console.error('Error al obtener USD:', error)
+    return 0
+  }
+}
 
 function evaluarExpresion(expresion) {
   try {
@@ -87,7 +120,7 @@ function convertirDesdeUsd() {
 }
 
 onMounted(async () => {
-  tasa.value = await obtenerUsd()
+  await obtenerUsd()
 })
 
 </script>
