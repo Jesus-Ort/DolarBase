@@ -42,7 +42,7 @@
 
         <!-- Fuente -->
         <p class="text-caption text-grey text-center mt-4">
-          Fuente: {{ fuente }}
+          Fuente: Página oficial del BCV.
         </p>
 
         <!-- Aviso legal -->
@@ -58,22 +58,17 @@
 
 <script setup>
 import { ref, onMounted } from "vue"
-import axios from "axios"
+import { obtenerUsd } from '~/composables/useUsd'
 
 const tasa = ref(0)
 const fechaActualizacion = ref("")
 const bolivares = ref("")
 const usd = ref("")
-const fuente = ref("")
-
 
 
 async function obtenerTasas() {
   try {
-    const { data } = await axios.get("https://bcvapi.tech/api/v1/dolar")
-    tasa.value = data.tasa
-    fechaActualizacion.value = data.fecha
-    fuente.value = data.fuente
+    tasa.value = await obtenerUsd()
   } catch (error) {
     console.error("Error al obtener tasas:", error)
   }
