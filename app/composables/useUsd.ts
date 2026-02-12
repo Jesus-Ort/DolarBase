@@ -2,7 +2,8 @@ const CACHE_KEY = 'usd_cache'
 const CACHE_TIME = 1 * 60 * 60 * 1000
 
 export async function obtenerUsd() {
-  const saved = localStorage.getItem(CACHE_KEY)
+  try {
+      const saved = localStorage.getItem(CACHE_KEY)
 
   if (saved) {
     const cache = JSON.parse(saved)
@@ -15,7 +16,7 @@ export async function obtenerUsd() {
 
   const data = await $fetch('/api/usd')
 
-  const valor = data.rates.usd
+  const valor = data.usd
 
   localStorage.setItem(
     CACHE_KEY,
@@ -26,4 +27,9 @@ export async function obtenerUsd() {
   )
 
   return valor
+  } catch (error) {
+    console.log("Error al obtener USD:", error)
+    return 0
+  }
+
 }

@@ -65,14 +65,6 @@ const fechaActualizacion = ref("")
 const bolivares = ref("")
 const usd = ref("")
 
-function obtenerTasas() {
-  try {
-    tasa.value = obtenerUsd()
-  } catch (error) {
-    console.error("Error al obtener tasas:", error)
-  }
-}
-
 function evaluarExpresion(expresion) {
   try {
     if (!/^[0-9+\-*/. ()]+$/.test(expresion)) return 0
@@ -94,7 +86,8 @@ function convertirDesdeUsd() {
   bolivares.value = resultado ? resultado.toFixed(2) : ""
 }
 
-onMounted(() => {
-  obtenerTasas()
+onMounted(async () => {
+  tasa.value = await obtenerUsd()
 })
+
 </script>
