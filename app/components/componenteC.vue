@@ -74,7 +74,9 @@ async function obtenerUsd() {
       const cache = JSON.parse(saved)
       const ahora = Date.now()
       if (ahora - cache.timestamp < CACHE_TIME) {
-        return Number(cache.value)
+        tasa.value = Number(cache.value)
+        fechaActualizacion.value = cache.fechaActualizacion || ""
+        return tasa.value
       }
     }
 
@@ -86,12 +88,11 @@ async function obtenerUsd() {
     tasa.value = valor
     fechaActualizacion.value = data.fechaActualizacion
 
-    
-
     localStorage.setItem(
       CACHE_KEY,
       JSON.stringify({
         value: valor,
+        fechaActualizacion: data.fechaActualizacion,
         timestamp: Date.now()
       })
     )
