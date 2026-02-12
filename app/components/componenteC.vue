@@ -9,7 +9,7 @@
         <!-- Tasa oficial -->
         <div class="text-center mb-4">
           <p class="text-subtitle-2 text-grey-darken-1">Tasa oficial del BCV</p>
-          <p class="text-h6 font-weight-bold">USD: {{ Number(tasa.value).toFixed(2) }} Bs</p>
+          <p class="text-h6 font-weight-bold">USD: {{ tasa.toFixed(2) }} Bs</p>
           <p class="text-caption text-grey mt-1">
             Actualizado: {{ fechaActualizacion }}
           </p>
@@ -77,11 +77,16 @@ async function obtenerUsd() {
         return Number(cache.value)
       }
     }
-    const data = await axios.get('https://bcv.justcarlux.dev/api/v1/rates')
 
-    const valor = Number(data?.data?.rates?.usd || 0)
+    const response = await axios.get('https://ve.dolarapi.com/v1/dolares/oficial')
+    const data = response.data
+
+    const valor = data?.promedio || 0
 
     tasa.value = valor
+    fechaActualizacion.value = data.fechaActualizacion
+
+    
 
     localStorage.setItem(
       CACHE_KEY,
@@ -94,7 +99,6 @@ async function obtenerUsd() {
     return valor
   } catch (error) {
     console.error('Error al obtener USD:', error)
-    return 0
   }
 }
 
@@ -119,8 +123,8 @@ function convertirDesdeUsd() {
   bolivares.value = resultado ? resultado.toFixed(2) : ""
 }
 
-onMounted(async () => {
-  await obtenerUsd()
-})
+onMounted(
+  obtenerUsd
+)
 
 </script>
