@@ -1,11 +1,9 @@
-export default async (req, res) => {
+export default defineEventHandler(async (event) => {
   try {
-    const respuesta = await fetch('https://dolar-base.vercel.app/api/tasa')
-    const data = await respuesta.json()
-
-    res.status(200).json({ usd: Number(data.usd) })
+    const respuesta = await $fetch('https://dolar-base.vercel.app/api/tasa')
+    return { usd: Number(respuesta.usd) || 0 }
   } catch (error) {
-    res.status(500).json({ error: 'No se pudo obtener la tasa' })
+    console.error('Error obteniendo USD:', error)
+    return { usd: 0, error: 'No se pudo obtener la tasa' }
   }
-}
- 
+})
