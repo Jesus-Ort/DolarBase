@@ -9,9 +9,9 @@ export default defineNuxtConfig({
   },
   app: {
       head: {
-        title: 'Calculadora BCV',
+        title: 'DolarBase — Calculadora BCV',
         meta: [
-      { name: 'description', content: 'Calculadora con la taza oficial del Dolar BCV a Bolivares.' }
+      { name: 'description', content: 'Convierte dólares (USD) a bolívares (Bs) con la tasa oficial del BCV. Calculadora de cambio actualizada al instante.' }
       ],
         htmlAttrs: {
           lang: 'es',

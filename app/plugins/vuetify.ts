@@ -17,8 +17,41 @@ export default defineNuxtPlugin((nuxtApp) => {
       aliases,
       sets: { mdi },
     },
+    defaults: {
+      VBtn: { rounded: 'lg' },
+      VTextField: {
+        variant: 'outlined',
+        density: 'comfortable',
+      },
+    },
     theme: {
       defaultTheme: 'light',
+      themes: {
+        light: {
+          dark: false,
+          colors: {
+            primary: '#00A971',
+            secondary: '#0FB8B0',
+            line: '#E3EAE6',
+            background: '#F3F6F4',
+            surface: '#FFFFFF',
+            'on-surface': '#1C2622',
+            'on-background': '#1C2622',
+          },
+        },
+        dark: {
+          dark: true,
+          colors: {
+            primary: '#2ECC71',
+            secondary: '#21C6B5',
+            line: '#24312B',
+            background: '#0B1210',
+            surface: '#131B17',
+            'on-surface': '#E6F2EC',
+            'on-background': '#E6F2EC',
+          },
+        },
+      },
     },
   })
 
