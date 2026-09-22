@@ -1,0 +1,37 @@
+# DolarBase
+
+> Conversor de dólares (USD) a bolívares (Bs) y viceversa, con la tasa oficial del Banco Central de Venezuela (BCV). Calculadora de cambio gratuita, actualizada diariamente y sin registros.
+
+## Resumen
+
+DolarBase es una aplicación web de una sola página que permite convertir dólares estadounidenses (USD) a bolívares (Bs) y de bolívares a dólares usando la tasa oficial publicada por el Banco Central de Venezuela (BCV). La tasa se obtiene a través de la API pública de dolarapi.com y se actualiza de forma periódica.
+
+## Funcionalidades
+
+- Conversión bidireccional USD ⇄ Bs con la tasa oficial del BCV.
+- Soporte para operaciones aritméticas en los campos de entrada (suma, resta, multiplicación, división).
+- Tema claro y oscuro.
+- Interfaz responsive compatible con móviles y escritorio.
+- Cache local de la tasa para accesos repetidos.
+
+## Tecnología
+
+- Framework: Nuxt.js (Vue 3).
+- UI: Vuetify 3.
+- Fuente de datos: dolarapi.com (API de tasas oficiales).
+
+## Enlaces
+
+- Sitio: https://dolarbase.jesusortega.xyz/
+- robots.txt: https://dolarbase.jesusortega.xyz/robots.txt
+- Sitemap: https://dolarbase.jesusortega.xyz/sitemap.xml
+
+## Autoría
+
+- Autor: Jesús Ortega (Desarrollador Web)
+- GitHub: https://github.com/Jesus-Ort
+- Sitio personal: https://jesusortega.xyz
+
+## Actualizado
+
+2026-09-22

@@ -15,7 +15,7 @@
                 <v-icon color="white" size="22">mdi-currency-usd</v-icon>
               </div>
               <div>
-                <p class="text-h6 font-weight-bold mb-0 title-text">DolarBase</p>
+                <h1 class="text-h6 font-weight-bold mb-0 title-text">DolarBase</h1>
                 <p class="text-caption text-medium-emphasis mb-0">Conversor BCV</p>
               </div>
             </div>
@@ -37,7 +37,7 @@
           <v-sheet class="rate-sheet rounded-lg pa-5 mb-6">
             <v-skeleton-loader v-if="cargando" dark type="text,text" class="mx-auto" max-width="180" />
             <template v-else>
-              <p class="text-caption mb-3 text-center font-weight-medium rate-label">Tasa oficial del BCV</p>
+              <h2 class="text-caption mb-3 text-center font-weight-medium rate-label">Tasa oficial del BCV</h2>
               <div class="d-flex align-center justify-center ga-3">
                 <span class="currency-code">USD</span>
                 <span class="rate-value">{{ tasa.toFixed(2) }} Bs</span>
@@ -100,7 +100,6 @@
 
 <script setup>
 import { ref, computed, onMounted } from "vue"
-import axios from "axios"
 import { useTheme } from "vuetify"
 
 const theme = useTheme()
@@ -115,6 +114,14 @@ const CACHE_KEY = 'usd_cache'
 const CACHE_TIME = 1 * 60 * 60 * 1000
 
 const isDark = computed(() => theme.global.current.value.dark)
+
+const { data: ssrTasa } = await useFetch('/api/tasa')
+
+if (ssrTasa.value?.promedio) {
+  tasa.value = Number(ssrTasa.value.promedio)
+  fechaActualizacion.value = formatearFecha(ssrTasa.value.fechaActualizacion)
+  cargando.value = false
+}
 
 function toggleTheme() {
   const next = isDark.value ? 'light' : 'dark'
@@ -157,8 +164,8 @@ async function obtenerUsd() {
   }
 
   try {
-    const response = await axios.get('https://ve.dolarapi.com/v1/dolares/oficial')
-    const data = response.data
+    const response = await $fetch('/api/tasa')
+    const data = response
 
     const valor = data?.promedio || 0
 

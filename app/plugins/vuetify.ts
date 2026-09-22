@@ -1,17 +1,35 @@
 // plugins/vuetify.ts
 import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import 'vuetify/styles'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
-
-// (opcional) si quieres usar íconos de Material Design
-import '@mdi/font/css/materialdesignicons.css'
+import {
+  VApp,
+  VBtn,
+  VCard,
+  VContainer,
+  VIcon,
+  VMain,
+  VSheet,
+  VSkeletonLoader,
+  VTextField,
+} from 'vuetify/components'
+import { Ripple } from 'vuetify/directives'
 
 export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
-    components,
-    directives,
+    components: {
+      VApp,
+      VBtn,
+      VCard,
+      VContainer,
+      VIcon,
+      VMain,
+      VSheet,
+      VSkeletonLoader,
+      VTextField,
+    },
+    directives: {
+      Ripple,
+    },
     icons: {
       defaultSet: 'mdi',
       aliases,
