@@ -14,6 +14,13 @@ export default defineNuxtConfig({
   },
   app: {
       head: {
+        script: [
+        {
+          async: true,
+          src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4814529944139675',
+          crossorigin: 'anonymous'
+        }
+      ],
         title: 'DolarBase',
         meta: [
       { name: 'description', content: 'Convierte dólares (USD) a bolívares (Bs) y viceversa con la tasa oficial del BCV. Calculadora de cambio gratuita, actualizada al instante y sin registros.' },
